@@ -58,9 +58,9 @@ static size_t lowmem_minfile[6] = {
 	1536,
 	2048,
 	4096,
-	5120,
-	5632,
-	6144
+	7168,
+	9728,
+	12800
 };
 static int lowmem_minfile_size = 6;
 
