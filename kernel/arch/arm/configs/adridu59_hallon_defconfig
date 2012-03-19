@@ -96,7 +96,7 @@ CONFIG_TIMERFD=y
 CONFIG_EVENTFD=y
 CONFIG_SHMEM=y
 # CONFIG_TINY_SHMEM is not set
-# /* GENERIC_ACL | TMPFS | TMPFS_POSIX_ACL can be disabled when using TINY_SHMEM */
+# /* TMPFS can be disabled when using TINY_SHMEM */
 CONFIG_ASHMEM=y
 CONFIG_AIO=y
 
