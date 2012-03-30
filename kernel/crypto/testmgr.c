@@ -1201,7 +1201,7 @@ static int test_cprng(struct crypto_rng *tfm, struct cprng_testvec *template,
 		      unsigned int tcount)
 {
 	const char *algo = crypto_tfm_alg_driver_name(crypto_rng_tfm(tfm));
-	int err, i, j, seedsize;
+	int err = 0, i, j, seedsize;
 	u8 *seed;
 	char result[32];
 
@@ -1461,7 +1461,7 @@ static int alg_test_cprng(const struct alg_test_desc *desc, const char *driver,
 			  u32 type, u32 mask)
 {
 	struct crypto_rng *rng;
-	int err;
+	int err = 0;
 
 	rng = crypto_alloc_rng(driver, type, mask);
 	if (IS_ERR(rng)) {
