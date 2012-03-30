@@ -2063,7 +2063,7 @@ msm_nand_write_oob(struct mtd_info *mtd, loff_t to, struct mtd_oob_ops *ops)
 	unsigned page = 0;
 	uint32_t oob_len;
 	uint32_t sectordatawritesize;
-	int err;
+	int err = 0;
 	dma_addr_t data_dma_addr = 0;
 	dma_addr_t oob_dma_addr = 0;
 	dma_addr_t data_dma_addr_curr = 0;
@@ -2398,7 +2398,7 @@ msm_nand_write_oob_dualnandc(struct mtd_info *mtd, loff_t to,
 	unsigned page = 0;
 	uint32_t oob_len;
 	uint32_t sectordatawritesize;
-	int err;
+	int err = 0;
 	dma_addr_t data_dma_addr = 0;
 	dma_addr_t oob_dma_addr = 0;
 	dma_addr_t data_dma_addr_curr = 0;
