@@ -133,7 +133,7 @@ static void dump_deathpending(struct task_struct *t_deathpending)
 	read_unlock(&tasklist_lock);
 }
 
-static int lowmem_shrink(struct shrinker *s, int nr_to_scan, gfp_t gfp_mask)
+static int lowmem_shrink(int nr_to_scan, gfp_t gfp_mask)
 {
 	struct task_struct *p;
 	struct task_struct *selected = NULL;
