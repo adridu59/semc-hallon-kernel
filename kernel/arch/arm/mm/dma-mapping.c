@@ -245,6 +245,10 @@ __dma_alloc(struct device *dev, size_t size, dma_addr_t *handle, gfp_t gfp,
 		*handle = page_to_dma(dev, page);
 
 		do {
+			if (off >= PTRS_PER_PTE) {
+				off = 0;
+				pte = consistent_pte[++idx];
+			}
 			BUG_ON(!pte_none(*pte));
 
 			/*
@@ -255,10 +259,6 @@ __dma_alloc(struct device *dev, size_t size, dma_addr_t *handle, gfp_t gfp,
 			page++;
 			pte++;
 			off++;
-			if (off >= PTRS_PER_PTE) {
-				off = 0;
-				pte = consistent_pte[++idx];
-			}
 		} while (size -= PAGE_SIZE);
 
 		/*
@@ -402,6 +402,7 @@ void dma_free_coherent(struct device *dev, size_t size, void *cpu_addr, dma_addr
 	struct arm_vm_region *c;
 	unsigned long flags, addr;
 	pte_t *ptep;
+	pte_t pte;
 	int idx;
 	u32 off;
 
@@ -437,17 +438,14 @@ void dma_free_coherent(struct device *dev, size_t size, void *cpu_addr, dma_addr
 	ptep = consistent_pte[idx] + off;
 	addr = c->vm_start;
 	do {
-		pte_t pte = ptep_get_and_clear(&init_mm, addr, ptep);
-		unsigned long pfn;
-
-		ptep++;
-		addr += PAGE_SIZE;
-		off++;
 		if (off >= PTRS_PER_PTE) {
 			off = 0;
 			ptep = consistent_pte[++idx];
 		}
-
+		pte = ptep_get_and_clear(&init_mm, addr, ptep);
+		ptep++;
+		addr += PAGE_SIZE;
+		off++;
 		if (!pte_none(pte) && pte_present(pte)) {
 			pfn = pte_pfn(pte);
 
