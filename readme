@@ -12,14 +12,12 @@ Build commands :
 
 // (old) - android-ndk
 
-export ARCH=arm
 export CROSS_COMPILE=~/toolchains/arm-eabi-4.4.3/prebuilt/linux-x86/bin/arm-eabi-
 
 ----------------
 
 // (new) - Sourcery CodeBench 2011.09
 
-export ARCH=arm
 export CROSS_COMPILE=~/arm-2011.09/bin/arm-none-eabi-
 
 ----------------
