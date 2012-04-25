@@ -218,7 +218,7 @@ inline static int work_cpumask_test_and_clear(unsigned long cpu) {
 	spin_lock_irqsave(&cpumask_lock, flags);
 	res = cpumask_test_and_clear_cpu(cpu, &work_cpumask);
 	spin_unlock_irqrestore(&cpumask_lock, flags);
-	return count;
+	return res;
 }
 
 inline static int target_freq(struct cpufreq_policy *policy, struct smartass_info_s *this_smartass,
